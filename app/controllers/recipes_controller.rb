@@ -10,14 +10,13 @@ class RecipesController < ApplicationController
   def new
     @recipe = Recipe.new
     2.times { @recipe.ingredients.build }
-    #binding.pry
   end
 
   def create
     @recipe = Recipe.new(recipe_params)
-    if @recipe.valid?
-      @recipe.save
-      redirect_to recipes_path
+    if @recipe.save
+      
+      redirect_to recipes_path(@recipe)
     else
       render :new
     end
